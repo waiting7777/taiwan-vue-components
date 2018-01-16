@@ -1,6 +1,5 @@
 const webpack = require('webpack')
 const path = require('path')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
     entry: path.resolve(__dirname + '/src/main.js'),
@@ -10,6 +9,10 @@ module.exports = {
         libraryTarget: 'umd',
         library: 'taiwan-vue-components',
         umdNamedDefine: true
+    },
+    externals: {
+        d3: 'd3',
+        topojson: 'topojson-client'
     },
     module: {
         loaders: [
@@ -25,7 +28,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new CleanWebpackPlugin('dist'),
         new webpack.optimize.UglifyJsPlugin({
             minimize: true,
             sourceMap: false,

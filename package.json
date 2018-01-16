@@ -1,6 +1,6 @@
 {
   "name": "taiwan-vue-components",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "taiwan svg chart vue components",
   "main": "dist/taiwan-vue-components.min.js",
   "scripts": {
@@ -28,6 +28,8 @@
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.8",
+    "d3": "^4.12.2",
+    "topojson-client": "^3.0.0",
     "vue": "^2.5.13",
     "vue-loader": "^13.7.0",
     "vue-template-compiler": "^2.5.13",

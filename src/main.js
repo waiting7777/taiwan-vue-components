@@ -1,3 +1,3 @@
-import Test from './components/Test.vue'
+import Country from './components/Country.vue'
 
-export { Test }
+export { Country }
