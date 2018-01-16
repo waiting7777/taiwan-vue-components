@@ -1,8 +1,8 @@
 {
   "name": "taiwan-vue-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "taiwan svg chart vue components",
-  "main": "./src/index.js",
+  "main": "dist/taiwan-vue-components.min.js",
   "scripts": {
     "build": "webpack -p"
   },
