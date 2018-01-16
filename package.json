@@ -1,0 +1,36 @@
+{
+  "name": "taiwan-vue-components",
+  "version": "1.0.0",
+  "description": "taiwan svg chart vue components",
+  "main": "./src/index.js",
+  "scripts": {
+    "build": "webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waiting7777/taiwan-vue-components.git"
+  },
+  "keywords": [
+    "taiwan",
+    "svg",
+    "d3",
+    "vue"
+  ],
+  "author": "waiting7777",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/waiting7777/taiwan-vue-components/issues"
+  },
+  "homepage": "https://github.com/waiting7777/taiwan-vue-components#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.8",
+    "vue": "^2.5.13",
+    "vue-loader": "^13.7.0",
+    "vue-template-compiler": "^2.5.13",
+    "webpack": "^3.10.0"
+  }
+}
