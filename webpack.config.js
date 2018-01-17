@@ -19,11 +19,16 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
+                include: __dirname,
                 exclude: /node_modules/
             },
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
+            },
+            {
+                test: /\.css$/,
+                loader: 'style!less!css'
             }
         ]
     },
