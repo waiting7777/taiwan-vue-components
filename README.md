@@ -11,6 +11,28 @@ $ npm install taiwan-vue-components --save
 
 ### Country 台灣縣市圖
 
+#### Html
+```html
+<html>
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script src="./dist/taiwan-vue-components.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <Country></Country>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app'
+        })
+    </script>
+</body>
+```
+
+#### Node.js
 ```js
 import {Country} from 'taiwan-vue-components'
 
