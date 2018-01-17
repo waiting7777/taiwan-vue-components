@@ -7,6 +7,9 @@
 $ npm install taiwan-vue-components --save
 ```
 
+## Live Demo
+[Live Demo](https://waiting7777.github.io/taiwan-vue-components/index.html)
+
 ## Usage
 
 ### Country 台灣縣市圖
@@ -40,19 +43,32 @@ import {Country} from 'taiwan-vue-components'
 ```
 
 + fill
-    縣市區塊顏色 預設 #FFFFFF
+    縣市區塊顏色 
+    預設 #FFFFFF
 
 + stroke
-    縣市線段顏色 預設: #B5B5B6
+    縣市線段顏色 
+    預設: #B5B5B6
 
 + width
-    SVG 寬 預設: 375
+    SVG 寬 
+    預設: 375
 
 + height
-    SVG 高 預設: 667
+    SVG 高 
+    預設: 667
+
++ lon
+    投影經度 
+    預設: 120.751864
+
++ lat
+    投影緯度 
+    預設: 23.400998
 
 + scale
-    台灣投影大小 預設: 7800
+    台灣投影大小 
+    預設: 7800
 
 
 ### 有任何想法改進或是修改的參數都歡迎幫忙修改or討論
