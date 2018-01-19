@@ -117,6 +117,8 @@ import {Country} from 'taiwan-vue-components'
     台灣投影大小 
     預設: 7800
 
+### TODO
+Towns level svg chart need some props!
 
 ### Any idea or problem is welcome!
 
