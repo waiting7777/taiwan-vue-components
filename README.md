@@ -29,6 +29,28 @@ $ npm install taiwan-vue-components --save
 <body>
     <div id="app">
         <Country></Country>
+        <Ilan></Ilan>
+        <Hsinchu></Hsinchu>
+        <Hsinchu-City></Hsinchu-City>
+        <Miaoli></Miaoli>
+        <Changhua></Changhua>
+        <Nantou></Nantou>
+        <Yunlin></Yunlin>
+        <Chiayi></Chiayi>
+        <Chiayi-City></Chiayi-City>
+        <Pingtung></Pingtung>
+        <Taitung></Taitung>
+        <Hualien></Hualien>
+        <Penghu></Penghu>
+        <Keelung></Keelung>
+        <Taipei></Taipei>
+        <Kaohsiung></Kaohsiung>
+        <New-Taipei></New-Taipei>
+        <Taichung></Taichung>
+        <Tainan></Tainan>
+        <Taoyuan></Taoyuan>
+        <Matsu></Matsu>
+        <Kinmen></Kinmen>
     </div>
     <script>
         var app = new Vue({
@@ -43,6 +65,28 @@ $ npm install taiwan-vue-components --save
 import {Country} from 'taiwan-vue-components'
 
 <Country></Country>
+<Ilan></Ilan>
+<Hsinchu></Hsinchu>
+<Hsinchu-City></Hsinchu-City>
+<Miaoli></Miaoli>
+<Changhua></Changhua>
+<Nantou></Nantou>
+<Yunlin></Yunlin>
+<Chiayi></Chiayi>
+<Chiayi-City></Chiayi-City>
+<Pingtung></Pingtung>
+<Taitung></Taitung>
+<Hualien></Hualien>
+<Penghu></Penghu>
+<Keelung></Keelung>
+<Taipei></Taipei>
+<Kaohsiung></Kaohsiung>
+<New-Taipei></New-Taipei>
+<Taichung></Taichung>
+<Tainan></Tainan>
+<Taoyuan></Taoyuan>
+<Matsu></Matsu>
+<Kinmen></Kinmen>
 ```
 
 + fill
