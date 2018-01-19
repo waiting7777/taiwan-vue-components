@@ -51,7 +51,7 @@ import {Country} from 'taiwan-vue-components'
 
 + stroke
     縣市線段顏色 
-    預設: #B5B5B6
+    預設: #000000
 
 + width
     SVG 寬 

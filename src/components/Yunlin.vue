@@ -1,7 +1,7 @@
 <template>
   <svg :width="svgWidth" :height="svgHeight">
     <g v-for="country in topoCountry">
-        <path :d="country.d" :id="country.location" class="country" :style="{fill: fill, stroke: stroke}">
+        <path :d="country.d" :id="country.location" class="town" :style="{fill: fill, stroke: stroke}">
             <title>{{country.location}}</title>
         </path>
     </g>
@@ -12,14 +12,14 @@
 
 import * as d3 from 'd3'
 import * as topojson from 'topojson-client'
-import country from '../json/country.json'
+import Yunlin from '../json/towns-10009.json'
 
 export default {
-    name: 'Country',
-    props: ['fill', 'stroke', 'width', 'height', 'scale', 'lon', 'lat'],
+    name: 'Yunlin',
+    props: ['fill', 'stroke', 'width', 'height'],
     data: function(){
         return{
-            country: country
+            Yunlin: Yunlin
         }
     },
     computed: {
@@ -29,16 +29,14 @@ export default {
         svgHeight: function(){
             return this.height || 667
         },
-        svgScale: function(){
-            return this.scale || 7800
-        },
         topoCountry: function(){
-            var prj = d3.geoMercator().center([this.lon || 120.751864, this.lat || 23.400998])
-                .scale(this.svgScale).translate([this.svgWidth/2, this.svgHeight/2])
+
+            var topo = topojson.feature(this.Yunlin, this.Yunlin.objects.map)
+
+            var prj = d3.geoMercator().fitSize([this.svgWidth, this.svgHeight], topo)
                 
             var path = d3.geoPath().projection(prj)
         
-            var topo = topojson.feature(this.country, this.country.objects.map)
             var temp = []
             for(var i in topo.features){
                 temp.push({
@@ -54,7 +52,7 @@ export default {
 
 <style scoped>
 
-.country{
+.town{
     fill: #FFFFFF;
     stroke: #000000;
     stroke-width: 0.5;
