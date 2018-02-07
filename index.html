@@ -9,25 +9,71 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
     <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="./dist/taiwan-vue-components.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+
     <style>
         #app{
             margin-top: 100px;
         }
-        svg{
-            border: 1px solid black;
-        }
+        
     </style>
 </head>
 <body>
     <div id="app">
-        <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-7">
-                <Country :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon" :lat="lat" :fill="fill"></Country>
+        <div class="ui sidebar visible inverted vertical menu">
+            <div class="item" to="/" @click="linkClick('Country')">Taiwan</div>
+            <div class="item" to="/Ilan" @click="linkClick('Ilan')">Ilan</div>
+        </div>
+        <div class="ui grid container">
+            <div class="column three wide">
+                <div class="ui  violet large label">
+                    {{code}}
+                </div>
             </div>
-            <div class="col-md-3">
+            <div class="column ten wide">
+                <div :style="{width: width+'px'}">
+                    <div class="ui fluid centered card red">
+                        <div class="image" style="background-color:#FFFFFF;">
+                            <Country :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon" :lat="lat" :fill="fill"></Country>
+                        </div>
+                        <div class="content">
+                            <div class="header">
+                                {{description}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column three wide">
+                <div class="ui labeled fluid input">
+                    <div class="ui label teal">width</div>
+                    <input type="text" v-model="width">
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui labeled fluid input">
+                    <div class="ui label teal">height</div>
+                    <input type="text" v-model="height">
+                </div>
+                <div class="ui divider"></div>
+                <div class="ui labeled fluid input">
+                    <div class="ui label teal">stroke</div>
+                    <input type="text" v-model="stroke">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-1">
+                <router-link to="/">Taiwan</router-link>
+                <router-link to="/Ilan">Ilan</router-link>
+            </div> -->
+            <!-- <div class="col-md-7"> -->
+                <!-- <router-view></router-view> -->
+                <!-- <Country :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon" :lat="lat" :fill="fill"></Country> -->
+            <!-- </div> -->
+            <!-- <div class="col-md-3">
                 <div class="input-group">
                     <span class="input-group-addon">寬度</span>
                     <input type="text" class="form-control" v-model="width" />
@@ -63,6 +109,8 @@
                     <input type="text" class="form-control" v-model="scale" />
                 </div>
             </div>
+            
+            
             <div class="col-md-12">
                 <Ilan width="400" height="400"></Ilan>
                 <Hsinchu width="400" height="400"></Hsinchu>
@@ -86,16 +134,25 @@
                 <Taoyuan width="400" height="400"></Taoyuan>
                 <Matsu width="400" height="400"></Matsu>
                 <Kinmen width="400" height="400"></Kinmen>
-            </div>
-        </div>
+            </div> -->
+        <!-- </div> -->
     </div>
     <script>
     
         var app = new Vue({
             el: '#app',
+            methods: {
+                linkClick: function(desc){
+                    this.code = `<${desc}></${desc}>`
+                    console.log(this.code)
+                    this.description = desc
+                }
+            },
             data: {
-                width: 800,
-                height: 800,
+                description: 'Country',
+                code: '<Country></Country>',
+                width: 375,
+                height: 667,
                 lon: 121.352866302,
                 lat: 24.14038893400007,
                 stroke: '#000000',
@@ -104,6 +161,6 @@
             }
         })
 
-    </script>
+    </script>    
 </body>
 </html>

@@ -39,6 +39,13 @@ export default {
             var path = d3.geoPath().projection(prj)
         
             var topo = topojson.feature(this.country, this.country.objects.map)
+
+            // var topo = topojson.feature(this.country, this.country.objects.map)
+
+            // var prj = d3.geoMercator().fitSize([this.svgWidth, this.svgHeight], topo)
+                
+            // var path = d3.geoPath().projection(prj)
+
             var temp = []
             for(var i in topo.features){
                 temp.push({
