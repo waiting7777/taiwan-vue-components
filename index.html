@@ -275,7 +275,7 @@
                 },
                 codeUpdate: function(desc){
                     if(this.fit == true){
-                        this.code = `<div id="#app">\n  <${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\"></${desc}></div>\n</div>\n<script src=\"https://d3js.org/d3.v4.min.js\"><\/script>\n<script src=\"https://unpkg.com/topojson-client@3\"><\/script>\n<script src=\"https://unpkg.com/vue@2.5.13/dist/vue.js\"><\/script>\n<script src=\"https://waiting7777.github.io/taiwan-vue-components/dist/taiwan-vue-components.min.js\"><\/script>\n<script>\n  var app = new Vue({\n    el:'#app'\n  })\n<\/script>`
+                        this.code = `<div id="app">\n  <${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\"></${desc}></div>\n</div>\n<script src=\"https://d3js.org/d3.v4.min.js\"><\/script>\n<script src=\"https://unpkg.com/topojson-client@3\"><\/script>\n<script src=\"https://unpkg.com/vue@2.5.13/dist/vue.js\"><\/script>\n<script src=\"https://waiting7777.github.io/taiwan-vue-components/dist/taiwan-vue-components.min.js\"><\/script>\n<script>\n  var app = new Vue({\n    el:'#app'\n  })\n<\/script>`
                     }
                     else{
                         this.code = `<${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\" lon=\"${this.lon/100}\" lat=\"${this.lat/100}\" scale=\"${this.scale}\"></${desc}>`
