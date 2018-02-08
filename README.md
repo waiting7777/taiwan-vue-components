@@ -28,7 +28,8 @@ $ npm install taiwan-vue-components --save
 </head>
 <body>
     <div id="app">
-        <Country></Country>
+        <Country width="800" height="600" stroke="#000000" fill="#DCDCDC" fit="true"></Country>
+        <Taipei width="800" height="600" stroke="#000000" fill="#DCDCDC" fit="false" lon="121.54" lat="25.09" scale="100000"></Taipei>
         <Ilan></Ilan>
         <Hsinchu></Hsinchu>
         <Hsinchu-City></Hsinchu-City>
@@ -43,7 +44,6 @@ $ npm install taiwan-vue-components --save
         <Hualien></Hualien>
         <Penghu></Penghu>
         <Keelung></Keelung>
-        <Taipei></Taipei>
         <Kaohsiung></Kaohsiung>
         <New-Taipei></New-Taipei>
         <Taichung></Taichung>
@@ -64,7 +64,8 @@ $ npm install taiwan-vue-components --save
 ```js
 import {Country} from 'taiwan-vue-components'
 
-<Country></Country>
+<Country width="800" height="600" stroke="#000000" fill="#DCDCDC" fit="true"></Country>
+<Taipei width="800" height="600" stroke="#000000" fill="#DCDCDC" fit="false" lon="121.54" lat="25.09" scale="100000"></Taipei>
 <Ilan></Ilan>
 <Hsinchu></Hsinchu>
 <Hsinchu-City></Hsinchu-City>
@@ -79,7 +80,6 @@ import {Country} from 'taiwan-vue-components'
 <Hualien></Hualien>
 <Penghu></Penghu>
 <Keelung></Keelung>
-<Taipei></Taipei>
 <Kaohsiung></Kaohsiung>
 <New-Taipei></New-Taipei>
 <Taichung></Taichung>
@@ -117,8 +117,9 @@ import {Country} from 'taiwan-vue-components'
     台灣投影大小 
     預設: 7800
 
-### TODO
-Towns level svg chart need some props!
++ fit
+    自動調整圖形參數
+    預設: false
 
 ### Any idea or problem is welcome!
 
