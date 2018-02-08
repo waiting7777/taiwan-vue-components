@@ -6,6 +6,15 @@ Taiwan SVG chart components
 
 ## Install
 
+html
+```html
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
+<script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+<script src="https://waiting7777.github.io/taiwan-vue-components/dist/taiwan-vue-components.min.js"></script>
+```
+
+node.js
 ```
 $ npm install taiwan-vue-components --save
 ```
