@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable = no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Taiwan Vue Components</title>
 
@@ -23,6 +23,13 @@
         }
         .item{
             cursor: pointer;
+        }
+        .ui.visible.sidebar{
+            transition: all 0.7s ease;
+            transform: translate(-100%, 0);
+        }
+        .ui.visible.sidebar.open{
+            transform: translate(0, 0);
         }
         .sliders {
             -webkit-appearance: none;
@@ -59,7 +66,7 @@
 </head>
 <body>
     <div id="app">
-        <div class="ui sidebar visible inverted vertical menu">
+        <div class="ui sidebar visible inverted vertical menu" :class="{open: sidebar}">
             <div class="item" @click="linkClick('Country')">台灣</div>
             <div class="item" @click="linkClick('Taipei')">台北市</div>
             <div class="item" @click="linkClick('NewTaipei')">新北市</div>
@@ -83,7 +90,7 @@
             <div class="item" @click="linkClick('Kinmen')">金門縣</div>
             <div class="item" @click="linkClick('Matsu')">連江縣</div>
         </div>
-        <div class="ui grid container">
+        <div class="ui stackable grid container">
             <div class="column sixteen wide">
                 <h4>code:</h4>
                 <pre v-highlightjs="code"><code class="html"></code></pre>
@@ -91,7 +98,7 @@
             <div class="column twelve wide">
                 <div :style="{width: width+'px'}">
                     <div class="ui fluid centered card red">
-                        <div class="image" @mousewheel="test" style="background-color:#FFFFFF;" v-if="open.Country">
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Country">
                             <Country :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Country>
                         </div>
                         <div class="image" style="background-color:#FFFFFF;" v-if="open.Taipei">
@@ -258,8 +265,22 @@
             },
             mounted: function() {
                 this.codeUpdate(this.description)
+                this.widthHandle()
+                window.addEventListener('resize', this.widthHandle)
             },
             methods: {
+                widthHandle: function() {
+                    if(window.innerWidth > 768){
+                        this.sidebar = true
+                        this.width = 800
+                        this.height = 600
+                    }
+                    else{
+                        this.sidebar = false
+                        this.width = window.innerWidth - 30
+                        this.height = window.innerHeight - 30
+                    }
+                },
                 test: function(event){
                     event.preventDefault()
                     if(event.deltaY > 0){
@@ -319,8 +340,8 @@
                     Keelung: false,
                     Kinmen: false,
                     Matsu: false
-                    
                 },
+                sidebar: false,
                 description: 'Country',
                 code: '<Country></Country>',
                 fit: true,
