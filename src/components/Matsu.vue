@@ -16,7 +16,7 @@ import Matsu from '../json/towns-09007.json'
 
 export default {
     name: 'Matsu',
-    props: ['fill', 'stroke', 'width', 'height'],
+    props: ['fill', 'stroke', 'width', 'height', 'scale', 'lon', 'lat', 'fit'],
     data: function(){
         return{
             Matsu: Matsu
@@ -29,11 +29,22 @@ export default {
         svgHeight: function(){
             return this.height || 667
         },
+        svgScale: function(){
+            return this.scale || 7800
+        },
         topoCountry: function(){
 
             var topo = topojson.feature(this.Matsu, this.Matsu.objects.map)
 
-            var prj = d3.geoMercator().fitSize([this.svgWidth, this.svgHeight], topo)
+            if(this.fit == true){
+                var prj = d3.geoMercator().fitSize([this.svgWidth, this.svgHeight], topo)
+            }
+
+            else{
+                var prj = d3.geoMercator().center([this.lon || 120.751864, this.lat || 23.400998])
+                    .scale(this.svgScale).translate([this.svgWidth/2, this.svgHeight/2])
+                
+            }
                 
             var path = d3.geoPath().projection(prj)
         

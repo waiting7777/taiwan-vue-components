@@ -16,7 +16,7 @@ import Miaoli from '../json/towns-10005.json'
 
 export default {
     name: 'Miaoli',
-    props: ['fill', 'stroke', 'width', 'height'],
+    props: ['fill', 'stroke', 'width', 'height', 'scale', 'lon', 'lat', 'fit'],
     data: function(){
         return{
             Miaoli: Miaoli
@@ -29,11 +29,22 @@ export default {
         svgHeight: function(){
             return this.height || 667
         },
+        svgScale: function(){
+            return this.scale || 7800
+        },
         topoCountry: function(){
 
             var topo = topojson.feature(this.Miaoli, this.Miaoli.objects.map)
 
-            var prj = d3.geoMercator().fitSize([this.svgWidth, this.svgHeight], topo)
+            if(this.fit == true){
+                var prj = d3.geoMercator().fitSize([this.svgWidth, this.svgHeight], topo)
+            }
+
+            else{
+                var prj = d3.geoMercator().center([this.lon || 120.751864, this.lat || 23.400998])
+                    .scale(this.svgScale).translate([this.svgWidth/2, this.svgHeight/2])
+                
+            }
                 
             var path = d3.geoPath().projection(prj)
         

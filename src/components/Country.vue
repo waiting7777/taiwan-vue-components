@@ -16,7 +16,7 @@ import country from '../json/country.json'
 
 export default {
     name: 'Country',
-    props: ['fill', 'stroke', 'width', 'height', 'scale', 'lon', 'lat'],
+    props: ['fill', 'stroke', 'width', 'height', 'scale', 'lon', 'lat', 'fit'],
     data: function(){
         return{
             country: country
@@ -33,18 +33,20 @@ export default {
             return this.scale || 7800
         },
         topoCountry: function(){
-            var prj = d3.geoMercator().center([this.lon || 120.751864, this.lat || 23.400998])
-                .scale(this.svgScale).translate([this.svgWidth/2, this.svgHeight/2])
-                
-            var path = d3.geoPath().projection(prj)
-        
+
             var topo = topojson.feature(this.country, this.country.objects.map)
 
-            // var topo = topojson.feature(this.country, this.country.objects.map)
+            if(this.fit == true){
+                var prj = d3.geoMercator().fitSize([this.svgWidth, this.svgHeight], topo)
+            }
 
-            // var prj = d3.geoMercator().fitSize([this.svgWidth, this.svgHeight], topo)
+            else{
+                var prj = d3.geoMercator().center([this.lon || 120.751864, this.lat || 23.400998])
+                    .scale(this.svgScale).translate([this.svgWidth/2, this.svgHeight/2])
                 
-            // var path = d3.geoPath().projection(prj)
+            }
+
+            var path = d3.geoPath().projection(prj)
 
             var temp = []
             for(var i in topo.features){

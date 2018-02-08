@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Taiwan Vue Components</title>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
@@ -16,7 +16,40 @@
 
     <style>
         #app{
-            margin-top: 100px;
+            margin-top: 50px;
+        }
+        .item{
+            cursor: pointer;
+        }
+        .sliders {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 25px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.9;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+        
+        .sliders:hover {
+            opacity: 1;
+        }
+        
+        .sliders::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: teal;
+            cursor: pointer;
+        }
+        
+        .sliders::-moz-range-thumb {
+            width: 25px;
+            height: 25px;
+            background: teal;
+            cursor: pointer;
         }
         
     </style>
@@ -24,20 +57,104 @@
 <body>
     <div id="app">
         <div class="ui sidebar visible inverted vertical menu">
-            <div class="item" to="/" @click="linkClick('Country')">Taiwan</div>
-            <div class="item" to="/Ilan" @click="linkClick('Ilan')">Ilan</div>
+            <div class="item" @click="linkClick('Country')">台灣</div>
+            <div class="item" @click="linkClick('Taipei')">台北市</div>
+            <div class="item" @click="linkClick('NewTaipei')">新北市</div>
+            <div class="item" @click="linkClick('Taoyuan')">桃園市</div>
+            <div class="item" @click="linkClick('Hsinchu')">新竹縣</div>
+            <div class="item" @click="linkClick('HsinchuCity')">新竹市</div>
+            <div class="item" @click="linkClick('Miaoli')">苗栗縣</div>
+            <div class="item" @click="linkClick('Taichung')">台中市</div>
+            <div class="item" @click="linkClick('Changhua')">彰化縣</div>
+            <div class="item" @click="linkClick('Nantou')">南投縣</div>
+            <div class="item" @click="linkClick('Yunlin')">雲林縣</div>
+            <div class="item" @click="linkClick('Chiayi')">嘉義縣</div>
+            <div class="item" @click="linkClick('ChiayiCity')">嘉義市</div>
+            <div class="item" @click="linkClick('Tainan')">台南市</div>
+            <div class="item" @click="linkClick('Kaohsiung')">高雄市</div>
+            <div class="item" @click="linkClick('Pingtung')">屏東縣</div>
+            <div class="item" @click="linkClick('Taitung')">台東縣</div>
+            <div class="item" @click="linkClick('Hualien')">花蓮縣</div>
+            <div class="item" @click="linkClick('Ilan')">宜蘭縣</div>
+            <div class="item" @click="linkClick('Keelung')">基隆市</div>
+            <div class="item" @click="linkClick('Kinmen')">金門縣</div>
+            <div class="item" @click="linkClick('Matsu')">連江縣</div>
         </div>
         <div class="ui grid container">
-            <div class="column three wide">
-                <div class="ui  violet large label">
+            <div class="column sixteen wide">
+                <h4>code:</h4>
+                <div class="ui violet large label">
                     {{code}}
                 </div>
             </div>
-            <div class="column ten wide">
+            <div class="column twelve wide">
                 <div :style="{width: width+'px'}">
                     <div class="ui fluid centered card red">
-                        <div class="image" style="background-color:#FFFFFF;">
-                            <Country :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon" :lat="lat" :fill="fill"></Country>
+                        <div class="image" @mousewheel="test" style="background-color:#FFFFFF;" v-if="open.Country">
+                            <Country :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Country>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Taipei">
+                            <Taipei :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Taipei>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.NewTaipei">
+                            <New-Taipei :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></New-Taipei>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Taoyuan">
+                            <Taoyuan :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Taoyuan>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Hsinchu">
+                            <Hsinchu :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Hsinchu>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.HsinchuCity">
+                            <Hsinchu-City :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Hsinchu-City>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Miaoli">
+                            <Miaoli :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Miaoli>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Taichung">
+                            <Taichung :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Taichung>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Changhua">
+                            <Changhua :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Changhua>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Nantou">
+                            <Nantou :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Nantou>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Yunlin">
+                            <Yunlin :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Yunlin>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Chiayi">
+                            <Chiayi :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Chiayi>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.ChiayiCity">
+                            <Chiayi-City :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Chiayi-City>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Tainan">
+                            <Tainan :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Tainan>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Kaohsiung">
+                            <Kaohsiung :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Kaohsiung>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Pingtung">
+                            <Pingtung :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Pingtung>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Taitung">
+                            <Taitung :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Taitung>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Hualien">
+                            <Hualien :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Hualien>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Ilan">
+                            <Ilan :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Ilan>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Keelung">
+                            <Keelung :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Keelung>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Kinmen">
+                            <Kinmen :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Kinmen>
+                        </div>
+                        <div class="image" style="background-color:#FFFFFF;" v-if="open.Matsu">
+                            <Matsu :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Matsu>
                         </div>
                         <div class="content">
                             <div class="header">
@@ -47,116 +164,145 @@
                     </div>
                 </div>
             </div>
-            <div class="column three wide">
-                <div class="ui labeled fluid input">
-                    <div class="ui label teal">width</div>
-                    <input type="text" v-model="width">
+            <div class="column four wide">
+                <div class="ui info message">
+                    <div class="ui labeled fluid input">
+                        <div class="ui label teal" style="height:25px;line-height:0.2;">width</div>
+                        <input type="range" class="sliders" min="0" max="2000" v-model="width">
+                        <span>{{ width }}</span>
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui labeled fluid input">
+                        <div class="ui label teal" style="height:25px;line-height:0.2;">height</div>
+                        <input type="range" class="sliders" min="0" max="2000" v-model="height">
+                        <span>{{ height }}</span>
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui labeled fluid input">
+                        <div class="ui label teal">stroke</div>
+                        <input type="text" v-model="stroke">
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui labeled fluid input">
+                        <div class="ui label teal">fill</div>
+                        <input type="text" v-model="fill">
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui labeled" style="position: absolute;left:1.5em;">
+                        <div class="ui label teal">fit</div>
+                    </div>
+                    <div class="ui slider checkbox" style="margin-left:80px;">
+                        <input type="checkbox" v-model="fit">
+                        <label class="ui teal column">{{fit}}</label>
+                    </div>
+                    <div v-if="!fit">
+                        <div class="ui divider"></div>    
+                        <div class="ui labeled fluid input">
+                            <div class="ui label teal" style="height:25px;line-height:0.2;">lon</div>
+                            <input type="range" class="sliders" min="12000" max="12200" v-model="lon" :disabled="fit">
+                            <span>{{ lon | fixnumber }}</span>
+                        </div>
+                        <div class="ui divider"></div>
+                        <div class="ui labeled fluid input">
+                            <div class="ui label teal" style="height:25px;line-height:0.2;">lat</div>
+                            <input type="range" class="sliders" min="2100" max="2600" v-model="lat" :disabled="fit">
+                            <span>{{ lat | fixnumber }}</span>
+                        </div>
+                        <div class="ui divider"></div>
+                        <div class="ui labeled fluid input">
+                            <div class="ui label teal" style="height:25px;line-height:0.2;">scale</div>
+                            <input type="range" class="sliders" min="0" max="100000" v-model="scale" :disabled="fit">
+                            <span>{{ scale }}</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="ui divider"></div>
-                <div class="ui labeled fluid input">
-                    <div class="ui label teal">height</div>
-                    <input type="text" v-model="height">
-                </div>
-                <div class="ui divider"></div>
-                <div class="ui labeled fluid input">
-                    <div class="ui label teal">stroke</div>
-                    <input type="text" v-model="stroke">
+                <div class="ui success message">
+                    如果選擇 fit 將會自動調整 (lat, lon, scale) 配合 svg 寬高，或是手動調整這些參數<br/><br/>*宜蘭、外島，因轄區特殊，不太適合用 fit 自動調整。
                 </div>
             </div>
         </div>
-        <!-- <div class="row">
-            <div class="col-md-1">
-                <router-link to="/">Taiwan</router-link>
-                <router-link to="/Ilan">Ilan</router-link>
-            </div> -->
-            <!-- <div class="col-md-7"> -->
-                <!-- <router-view></router-view> -->
-                <!-- <Country :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon" :lat="lat" :fill="fill"></Country> -->
-            <!-- </div> -->
-            <!-- <div class="col-md-3">
-                <div class="input-group">
-                    <span class="input-group-addon">寬度</span>
-                    <input type="text" class="form-control" v-model="width" />
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">高度</span>
-                    <input type="text" class="form-control" v-model="height" />
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">經度</span>
-                    <input type="text" class="form-control" v-model="lon" />
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">緯度</span>
-                    <input type="text" class="form-control" v-model="lat" />
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">線條顏色</span>
-                    <input type="text" class="form-control" v-model="stroke"/>
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">區塊顏色</span>
-                    <input type="text" class="form-control" v-model="fill" />
-                </div>
-                <br/>
-                <div class="input-group">
-                    <span class="input-group-addon">放大倍率</span>
-                    <input type="text" class="form-control" v-model="scale" />
-                </div>
-            </div>
-            
-            
-            <div class="col-md-12">
-                <Ilan width="400" height="400"></Ilan>
-                <Hsinchu width="400" height="400"></Hsinchu>
-                <Hsinchu-City width="400" height="400"></Hsinchu-City>
-                <Miaoli width="400" height="400"></Miaoli>
-                <Changhua width="400" height="400"></Changhua>
-                <Nantou width="400" height="400"></Nantou>
-                <Yunlin width="400" height="400"></Yunlin>
-                <Chiayi width="400" height="400"></Chiayi>
-                <Chiayi-City width="400" height="400"></Chiayi-City>
-                <Pingtung width="400" height="400"></Pingtung>
-                <Taitung width="400" height="400"></Taitung>
-                <Hualien width="400" height="400"></Hualien>
-                <Penghu width="400" height="400"></Penghu>
-                <Keelung width="400" height="400"></Keelung>
-                <Taipei width="400" height="400"></Taipei>
-                <Kaohsiung width="400" height="400"></Kaohsiung>
-                <New-Taipei width="400" height="400"></New-Taipei>
-                <Taichung width="400" height="400"></Taichung>
-                <Tainan width="400" height="400"></Tainan>
-                <Taoyuan width="400" height="400"></Taoyuan>
-                <Matsu width="400" height="400"></Matsu>
-                <Kinmen width="400" height="400"></Kinmen>
-            </div> -->
-        <!-- </div> -->
     </div>
     <script>
     
         var app = new Vue({
             el: '#app',
+            beforeUpdate: function(){
+                this.codeUpdate(this.description)
+            },
+            mounted: function() {
+                this.codeUpdate(this.description)
+            },
             methods: {
+                test: function(event){
+                    event.preventDefault()
+                    if(event.deltaY > 0){
+                        if(this.scale < 100000){
+                            this.scale += 500
+                        }
+                    }
+                    else{
+                        if(this.scale > 0){
+                            this.scale -= 500
+                        }
+                    }
+                    console.log(10)
+                },
+                codeUpdate: function(desc){
+                    if(this.fit == true){
+                        this.code = `<${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\"></${desc}>`
+                    }
+                    else{
+                        this.code = `<${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\" lon=\"${this.lon/100}\" lat=\"${this.lat/100}\" scale=\"${this.scale}\"></${desc}>`
+                    }                    
+                },
                 linkClick: function(desc){
-                    this.code = `<${desc}></${desc}>`
-                    console.log(this.code)
                     this.description = desc
+                    for(var i in this.open){
+                        this.open[i] = false
+                    }
+                    this.open[desc] = true
+                }
+            },
+            filters: {
+                fixnumber: function(value){
+                    return Number(value/100).toFixed(2)
                 }
             },
             data: {
+                open: {
+                    Country: true,
+                    Taipei: false,
+                    NewTaipei: false,
+                    Taoyuan: false,
+                    Hsinchu: false,
+                    HsinchuCity: false,
+                    Miaoli: false,
+                    Taichung: false,
+                    Nantou: false,
+                    Changhua: false,
+                    Yunlin: false,
+                    Chiayi: false,
+                    ChiayiCity: false,
+                    Tainan: false,
+                    Kaohsiung: false,
+                    Pingtung: false,
+                    Taitung: false,
+                    Hualien: false,
+                    Ilan: false,
+                    Keelung: false,
+                    Kinmen: false,
+                    Matsu: false
+                    
+                },
                 description: 'Country',
                 code: '<Country></Country>',
-                width: 375,
-                height: 667,
-                lon: 121.352866302,
-                lat: 24.14038893400007,
+                fit: true,
+                width: 800,
+                height: 600,
+                lon: 12135,
+                lat: 2364,
                 stroke: '#000000',
-                fill: '#FFFFFF',
+                fill: '#DCDCDC',
                 scale: '7800'
             }
         })
