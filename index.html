@@ -10,12 +10,15 @@
     <script src="https://unpkg.com/topojson-client@3"></script>
     <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
     <script src="./dist/taiwan-vue-components.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 
     <style>
         #app{
-            margin-top: 50px;
+            margin-top: 20px;
         }
         .item{
             cursor: pointer;
@@ -82,9 +85,7 @@
         <div class="ui grid container">
             <div class="column sixteen wide">
                 <h4>code:</h4>
-                <div class="ui violet large label">
-                    {{code}}
-                </div>
+                <pre v-highlightjs="code"><code class="html"></code></pre>
             </div>
             <div class="column twelve wide">
                 <div :style="{width: width+'px'}">
@@ -222,6 +223,32 @@
         </div>
     </div>
     <script>
+
+        Vue.directive('highlightjs', {
+            // deep: true,
+            bind: function(el, binding) {
+                // on first bind, highlight all targets
+                let targets = el.querySelectorAll('code')
+                targets.forEach((target) => {
+                // if a value is directly assigned to the directive, use this
+                // instead of the element content.
+                if (binding.value) {
+                    target.textContent = binding.value
+                }
+                hljs.highlightBlock(target)
+                })
+            },
+            componentUpdated: function(el, binding) {
+                // after an update, re-fill the content and then highlight
+                let targets = el.querySelectorAll('code')
+                targets.forEach((target) => {
+                if (binding.value) {
+                    target.textContent = binding.value
+                    hljs.highlightBlock(target)
+                }
+                })
+            }
+        })
     
         var app = new Vue({
             el: '#app',
@@ -248,7 +275,7 @@
                 },
                 codeUpdate: function(desc){
                     if(this.fit == true){
-                        this.code = `<${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\"></${desc}>`
+                        this.code = `<div id="#app">\n  <${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\"></${desc}></div>\n</div>\n<script src=\"https://d3js.org/d3.v4.min.js\"><\/script>\n<script src=\"https://unpkg.com/topojson-client@3\"><\/script>\n<script src=\"https://unpkg.com/vue@2.5.13/dist/vue.js\"><\/script>\n<script src=\"https://waiting7777.github.io/taiwan-vue-components/dist/taiwan-vue-components.min.js\"><\/script>\n<script>\n  var app = new Vue({\n    el:'#app'\n  })\n<\/script>`
                     }
                     else{
                         this.code = `<${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\" lon=\"${this.lon/100}\" lat=\"${this.lat/100}\" scale=\"${this.scale}\"></${desc}>`
