@@ -12,7 +12,7 @@
     <script src="./dist/taiwan-vue-components.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
     
-
+    <link rel="stylesheet" href=https://udn.com/upf/newmedia/css/bootstrap.min.css>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css">
 
@@ -61,12 +61,38 @@
             background: teal;
             cursor: pointer;
         }
+
+        #side{
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            top: 10px;
+            left: 10px;
+            background: black;
+            color: white;
+            z-index: 9999;
+            transition: all 0.7s ease;
+        }
+
+        #side.open{
+            transform: translate(210px, 0);
+        }
+
+        #side .icon{
+            font-size: 25px;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+        }
         
     </style>
 </head>
 <body>
     <div id="app">
-        <div class="ui sidebar visible inverted vertical menu" :class="{open: sidebar}">
+        <div id="side" @click="sideClick" class="hidden-md hidden-lg" :class="{open: sidebar}">
+            <i class="sidebar icon"></i>
+        </div>
+        <div class="ui sidebar visible inverted vertical menu" :class="{open: sidebar}" @click="sidebarClick">
             <div class="item" @click="linkClick('Country')">台灣</div>
             <div class="item" @click="linkClick('Taipei')">台北市</div>
             <div class="item" @click="linkClick('NewTaipei')">新北市</div>
@@ -269,6 +295,14 @@
                 window.addEventListener('resize', this.widthHandle)
             },
             methods: {
+                sidebarClick: function() {
+                    if(window.innerWidth < 1025){
+                        this.sidebar = false
+                    }
+                },
+                sideClick: function() {
+                    this.sidebar = !this.sidebar
+                },
                 widthHandle: function() {
                     if(window.innerWidth > 768){
                         this.sidebar = true
