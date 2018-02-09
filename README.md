@@ -70,33 +70,35 @@ $ npm install taiwan-vue-components --save
 ```
 
 #### Node.js
-```js
-import {Country} from 'taiwan-vue-components'
 
-<Country width="800" height="600" stroke="#000000" fill="#DCDCDC" fit="true"></Country>
-<Taipei width="800" height="600" stroke="#000000" fill="#DCDCDC" fit="false" lon="121.54" lat="25.09" scale="100000"></Taipei>
-<Ilan></Ilan>
-<Hsinchu></Hsinchu>
-<Hsinchu-City></Hsinchu-City>
-<Miaoli></Miaoli>
-<Changhua></Changhua>
-<Nantou></Nantou>
-<Yunlin></Yunlin>
-<Chiayi></Chiayi>
-<Chiayi-City></Chiayi-City>
-<Pingtung></Pingtung>
-<Taitung></Taitung>
-<Hualien></Hualien>
-<Penghu></Penghu>
-<Keelung></Keelung>
-<Kaohsiung></Kaohsiung>
-<New-Taipei></New-Taipei>
-<Taichung></Taichung>
-<Tainan></Tainan>
-<Taoyuan></Taoyuan>
-<Matsu></Matsu>
-<Kinmen></Kinmen>
+1. 選用全部
+```js
+import Taiwan from 'taiwan-vue-components'
+
+Vue.use(Taiwan)
 ```
+這樣即可自動安裝全部的 components
+
+2. 選用特定 EX: 臺北
+```html
+<template>
+  <div id="app">
+    <Taipei></Taipei>
+  </div>
+</template>
+
+<script>
+import { Taipei } from 'taiwan-vue-compoents'
+
+export default {
+  name: 'App',
+  components: {
+    Taipei
+  }
+}
+</script>
+```
+只 import 特定縣市，宣告到 compoents裡面
 
 + fill
     縣市區塊顏色 
