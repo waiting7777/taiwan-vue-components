@@ -13,13 +13,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
     
     <link rel="stylesheet" href=https://udn.com/upf/newmedia/css/bootstrap.min.css>
+    <link rel="stylesheet" href=https://udn.com/upf/newmedia/css/font-awesome.min.css>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-dark.min.css">
 
     <style>
         #app{
             margin-top: 20px;
-            margin-bottom: 100px;
+            position: relative;
+            padding-bottom: 100px;
         }
         .item{
             cursor: pointer;
@@ -83,6 +85,21 @@
             width: 30px;
             height: 30px;
             line-height: 30px;
+        }
+
+        #editor{
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 150px;
+            height: 50px;
+        }
+
+        #editor .fa{
+            color: #000000;
+            font-size: 25px;
+            margin-left: 10px;
+            cursor: pointer;
         }
         
     </style>
@@ -253,6 +270,13 @@
                 <div class="ui success message">
                     如果選擇 fit 將會自動調整 (lat, lon, scale) 配合 svg 寬高，或是手動調整這些參數<br/><br/>*宜蘭、外島，因轄區特殊，不太適合用 fit 自動調整。
                 </div>
+            </div>
+        </div>
+        <div id="editor">
+            <div class="ui message">
+                <a href="https://github.com/waiting7777/taiwan-vue-components" target="_blank"><i class="fa fa-github"></i></a>
+                <a href="https://twitter.com/waiting7777" target="_blank"><i class="fa fa-twitter"></i></a>
+                <a href="https://medium.com/@waiting7777" target="_blank"><i class="fa fa-medium"></i></a>
             </div>
         </div>
     </div>
