@@ -1,6 +1,6 @@
 # taiwan-vue-components
-Taiwan SVG chart components
-台灣行政區 SVG 圖表 組件 
+Taiwan SVG chart Vue components
+台灣行政區 SVG 圖表 Vue 組件 
 
 [![github version](https://img.shields.io/github/release/waiting7777/taiwan-vue-components.svg)](https://github.com/waiting7777/taiwan-vue-components/releases/) [![npm version](https://img.shields.io/npm/v/taiwan-vue-components.svg)](https://www.npmjs.com/package/taiwan-vue-components) [![license](https://img.shields.io/github/license/waiting7777/taiwan-vue-components.svg)](https://github.com/waiting7777/taiwan-vue-components/blob/master/LICENSE) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)](https://github.com/waiting7777/taiwan-vue-components/pulls) [![code with hearth by Waiting7777](https://img.shields.io/badge/%3C%2F%3E%20code%20with%20%E2%99%A5-Waiting7777-brightgreen.svg)](https://github.com/waiting7777)
 
