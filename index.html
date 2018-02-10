@@ -101,6 +101,12 @@
             margin-left: 10px;
             cursor: pointer;
         }
+        .ui.ribbon.label{
+            width: 100px;
+            position: absolute;
+            z-index: 99;
+            left: -14px;
+        }
         
     </style>
 </head>
@@ -141,6 +147,7 @@
             <div class="column twelve wide">
                 <div :style="{width: width+'px'}">
                     <div class="ui fluid centered card red">
+                        <div class="ui red ribbon label" v-text="chinese()"></div>
                         <div class="image" style="background-color:#FFFFFF;" v-if="open.Country">
                             <Country :stroke="stroke" :scale="scale" :width="width" :height="height" :lon="lon/100" :lat="lat/100" :fill="fill" :fit="fit"></Country>
                         </div>
@@ -243,26 +250,26 @@
                         <div class="ui label teal">fit</div>
                     </div>
                     <div class="ui slider checkbox" style="margin-left:80px;">
-                        <input type="checkbox" v-model="fit">
+                        <input type="checkbox" v-model="fit" @click="setDefault">
                         <label class="ui teal column">{{fit}}</label>
                     </div>
                     <div v-if="!fit">
                         <div class="ui divider"></div>    
                         <div class="ui labeled fluid input">
                             <div class="ui label teal" style="height:25px;line-height:0.2;">lon</div>
-                            <input type="range" class="sliders" min="12000" max="12200" v-model="lon" :disabled="fit">
+                            <input type="range" class="sliders" min="11000" max="12200" v-model="lon" :disabled="fit">
                             <span>{{ lon | fixnumber }}</span>
                         </div>
                         <div class="ui divider"></div>
                         <div class="ui labeled fluid input">
                             <div class="ui label teal" style="height:25px;line-height:0.2;">lat</div>
-                            <input type="range" class="sliders" min="2100" max="2600" v-model="lat" :disabled="fit">
+                            <input type="range" class="sliders" min="2100" max="3000" v-model="lat" :disabled="fit">
                             <span>{{ lat | fixnumber }}</span>
                         </div>
                         <div class="ui divider"></div>
                         <div class="ui labeled fluid input">
                             <div class="ui label teal" style="height:25px;line-height:0.2;">scale</div>
-                            <input type="range" class="sliders" min="0" max="100000" v-model="scale" :disabled="fit">
+                            <input type="range" class="sliders" min="0" max="120000" v-model="scale" :disabled="fit">
                             <span>{{ scale }}</span>
                         </div>
                     </div>
@@ -319,6 +326,9 @@
                 window.addEventListener('resize', this.widthHandle)
             },
             methods: {
+                chinese: function(){
+                    return this.default[this.description].desc
+                },
                 sidebarClick: function() {
                     if(window.innerWidth < 1025){
                         this.sidebar = false
@@ -339,18 +349,13 @@
                         this.height = window.innerHeight - 30
                     }
                 },
-                test: function(event){
-                    event.preventDefault()
-                    if(event.deltaY > 0){
-                        if(this.scale < 100000){
-                            this.scale += 500
-                        }
-                    }
-                    else{
-                        if(this.scale > 0){
-                            this.scale -= 500
-                        }
-                    }
+                setDefault: function(){
+                    // if(this.fit == false){
+                        console.log(10)
+                        this.lon = this.default[this.description].lon
+                        this.lat = this.default[this.description].lat
+                        this.scale = this.default[this.description].scale
+                    // }
                     console.log(10)
                 },
                 codeUpdate: function(desc){
@@ -358,7 +363,7 @@
                         this.code = `<div id="app">\n  <${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\"></${desc}></div>\n</div>\n<script src=\"https://d3js.org/d3.v4.min.js\"><\/script>\n<script src=\"https://unpkg.com/topojson-client@3\"><\/script>\n<script src=\"https://unpkg.com/vue@2.5.13/dist/vue.js\"><\/script>\n<script src=\"https://waiting7777.github.io/taiwan-vue-components/dist/taiwan-vue-components.min.js\"><\/script>\n<script>\n  var app = new Vue({\n    el:'#app'\n  })\n<\/script>`
                     }
                     else{
-                        this.code = `<${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\" lon=\"${this.lon/100}\" lat=\"${this.lat/100}\" scale=\"${this.scale}\"></${desc}>`
+                        this.code = `<div id="app">\n  <${desc} width=\"${this.width}\" height=\"${this.height}\" stroke=\"${this.stroke}\" fill=\"${this.fill}\" fit=\"${this.fit}\" lon=\"${this.lon/100}" lat=\"${this.lat/100}\" scale=\"${this.scale}\"></${desc}></div>\n</div>\n<script src=\"https://d3js.org/d3.v4.min.js\"><\/script>\n<script src=\"https://unpkg.com/topojson-client@3\"><\/script>\n<script src=\"https://unpkg.com/vue@2.5.13/dist/vue.js\"><\/script>\n<script src=\"https://waiting7777.github.io/taiwan-vue-components/dist/taiwan-vue-components.min.js\"><\/script>\n<script>\n  var app = new Vue({\n    el:'#app'\n  })\n<\/script>`
                     }                    
                 },
                 linkClick: function(desc){
@@ -399,6 +404,140 @@
                     Kinmen: false,
                     Matsu: false
                 },
+                default: {
+                    Country: {
+                        lon: 12135,
+                        lat: 2364,
+                        scale: 7800,
+                        desc: '台灣'
+                    },
+                    Taipei: {
+                        lon: 12154,
+                        lat: 2509,
+                        scale: 100000,
+                        desc: '台北市'
+                    },
+                    newTaipei: {
+                        lon: 12154,
+                        lat: 2501,
+                        scale: 32199,
+                        desc: '新北市'
+                    },
+                    Taoyuan: {
+                        lon: 12121,
+                        lat: 2484,
+                        scale: 46814,
+                        desc: '桃園市'
+                    },
+                    Hsinchu: {
+                        lon: 12108,
+                        lat: 2467,
+                        scale: 46800,
+                        desc: '新竹縣'
+                    },
+                    HsinchuCity: {
+                        lon: 12095,
+                        lat: 2478,
+                        scale: 100000,
+                        desc: '新竹市'
+                    },
+                    Miaoli: {
+                        lon: 12095,
+                        lat: 2456,
+                        scale: 38045,
+                        desc: '苗栗縣'
+                    },
+                    Taichung: {
+                        lon: 12095,
+                        lat: 2427,
+                        scale: 38045,
+                        desc: '台中市'
+                    },
+                    Changhua: {
+                        lon: 12049,
+                        lat: 2399,
+                        scale: 51199,
+                        desc: '彰化縣'
+                    },
+                    Nantou: {
+                        lon: 12098,
+                        lat: 2382,
+                        scale: 27815,
+                        desc: '南投縣'
+                    },
+                    Yunlin: {
+                        lon: 12038,
+                        lat: 2376,
+                        scale: 27815,
+                        desc: '雲林縣'
+                    },
+                    Chiayi: {
+                        lon: 12051,
+                        lat: 2348,
+                        scale: 27815,
+                        desc: '嘉義縣'
+                    },
+                    ChiayiCity: {
+                        lon: 12041,
+                        lat: 2348,
+                        scale: 100000,
+                        desc: '嘉義市'
+                    },
+                    Tainan: {
+                        lon: 12030,
+                        lat: 2320,
+                        scale: 40968,
+                        desc: '台南市'
+                    },
+                    Kaohsiung: {
+                        lon: 12049,
+                        lat: 2297,
+                        scale: 27815,
+                        desc: '高雄市'
+                    },
+                    Pingtung: {
+                        lon: 12061,
+                        lat: 2246,
+                        scale: 24892,
+                        desc: '屏東縣'
+                    },
+                    Taitung: {
+                        lon: 12103,
+                        lat: 2269,
+                        scale: 19045,
+                        desc: '台東縣'
+                    },
+                    Hualien: {
+                        lon: 12137,
+                        lat: 2382,
+                        scale: 19045,
+                        desc: '花蓮縣'
+                    },
+                    Ilan: {
+                        lon: 12160,
+                        lat: 2467,
+                        scale: 29276,
+                        desc: '宜蘭縣'
+                    },
+                    Keelun: {
+                        lon: 12168,
+                        lat: 2512,
+                        scale: 100000,
+                        desc: '基隆縣'
+                    },
+                    Kinmen: {
+                        lon: 11828,
+                        lat: 2447,
+                        scale: 63622,
+                        desc: '金門縣'
+                    },
+                    Matsu: {
+                        lon: 12015,
+                        lat: 2623,
+                        scale: 37762,
+                        desc: '連江縣'
+                    }
+                },
                 sidebar: false,
                 description: 'Country',
                 code: '<Country></Country>',
@@ -408,8 +547,8 @@
                 lon: 12135,
                 lat: 2364,
                 stroke: '#000000',
-                fill: '#DCDCDC',
-                scale: '7800'
+                fill: '#F9F9F9',
+                scale: 7800
             }
         })
 
